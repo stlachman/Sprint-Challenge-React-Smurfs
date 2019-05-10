@@ -3,20 +3,30 @@ import styled from 'styled-components';
 
 import Smurf from './Smurf';
 
+const Wrapper = styled.div`
+  margin: 2.5rem 0 0;
+`;
+
+const MainTitle = styled.h1`
+  font-size: 3rem;
+`;
+
 const SmurfContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin: 2rem 0 0;
 `;
-
 
 class Smurfs extends Component {
   render() {
+    // console.log(this.props);
     return (
-      <div className="Smurfs">
-        <h1>Smurf Village</h1>
+      <Wrapper>
+        <MainTitle>Smurf Village</MainTitle>
           <SmurfContainer>
             {this.props.smurfs.map(smurf => {
+              
               return (
                 <Smurf
                   name={smurf.name}
@@ -24,11 +34,12 @@ class Smurfs extends Component {
                   age={smurf.age}
                   height={smurf.height}
                   key={smurf.id}
+                  deleteSmurf={this.props.deleteSmurf}
                 />
               );
-            })}
+            })}            
           </SmurfContainer>
-      </div>
+      </Wrapper>
     );
   }
 }
