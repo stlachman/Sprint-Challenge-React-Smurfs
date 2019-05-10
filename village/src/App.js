@@ -5,6 +5,7 @@ import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import Navigation from './components/Navigation';
+import SingleSmurf from './components/SingleSmurf';
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class App extends Component {
         <Navigation />
         <Route exact path="/" render={props => <Smurfs {...props} deleteSmurf={this.deleteSmurf} smurfs={this.state.smurfs} />} />
         <Route path="/smurf-form" render={props => <SmurfForm {...props} postSmurf={this.postSmurf} />}/>
+        <Route path="/smurfs/:id" render={props => <SingleSmurf {...props} /> }/>
       </div>
     );
   }

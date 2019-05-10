@@ -36,8 +36,21 @@ let smurfs = [
 server.get('/smurfs', (req, res) => {
   res.json(smurfs);
 });
-let smurfId = 3;
 
+server.get('/getSmurfById/:id', (req, res) => {
+  const { id } = req.params;
+  const findSmurfById = smurf => {
+    return smurf.id == id;
+  };
+  const foundSmurf = smurfs.find(findSmurfById);
+  if (!foundSmurf) {
+    return sendUserError("No Item found by that ID", res);
+  } else {
+    res.json(foundSmurf);
+  } 
+})
+
+let smurfId = 3;
 
 server.post('/smurfs', (req, res) => {
   const { name, age, height } = req.body;

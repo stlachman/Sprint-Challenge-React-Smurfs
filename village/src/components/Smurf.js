@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Tile = styled.div`
@@ -18,6 +19,13 @@ const Text = styled.p`
 
 const BoldText = styled(Text)`
   font-weight: 700;
+`;
+
+const StyledLink = styled(Link)`
+  color: #f9f9f9;
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 1rem;
 `;
 
 const Button = styled.button`
@@ -40,6 +48,7 @@ const Smurf = props => {
       <Title>{props.name}</Title>
       <BoldText>{props.height} tall</BoldText>
       <Text>{props.age} smurf years old</Text>
+      <StyledLink to={`/smurfs/${props.id}`}>View Smurf</StyledLink>
       <Button onClick={() => props.deleteSmurf(props.id)}>Delete Smurf</Button>
     </Tile>
   )
