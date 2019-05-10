@@ -24,9 +24,15 @@ class SingleSmurf extends React.Component {
 			.get(`http://localhost:3333/getSmurfById/${this.props.match.params.id}`)
 			.then((res) => this.setState({ smurf: res.data }))
 			.catch((err) => console.log(err));
-	}
+  }
+  
+  updateForm = (event) => {
+    event.preventDefault();
+    this.props.setUpdateForm(this.state.smurf);
+  };
 
 	render() {
+    console.log(this.props);
 		const { smurf } = this.state;
 
 		if (!smurf) {
@@ -37,6 +43,7 @@ class SingleSmurf extends React.Component {
 				<Title>Name: {smurf.name}</Title>
 				<Text>Height: {smurf.height}</Text>
 				<Text>Age: {smurf.age}</Text>
+        <button onClick={() => this.props.setUpdateForm(smurf)}>Update Smurf</button>
 			</Container>
 		);
 	}

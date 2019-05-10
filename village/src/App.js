@@ -6,12 +6,14 @@ import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import Navigation from './components/Navigation';
 import SingleSmurf from './components/SingleSmurf';
+import UpdateSmurfForm from './components/UpdateSmurf';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       smurfs: [],
+      activeSmurf: null
     };
   }
 
@@ -41,13 +43,28 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+  updateSmurf = (updatedSmurf) => {
+    axios.put(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
+    .then(res => {
+      this.setState({ smurfs: res.data });
+      this.props.history.push('/');
+    })
+    .catch(err =>  console.log(err));
+  }
+
+  setUpdateForm = (smurf) => {
+    this.setState({ activeSmurf: smurf});
+    this.props.history.push('/update-smurf');
+  }
+
   render() {
     return (
       <div className="App">
         <Navigation />
         <Route exact path="/" render={props => <Smurfs {...props} deleteSmurf={this.deleteSmurf} smurfs={this.state.smurfs} />} />
         <Route path="/smurf-form" render={props => <SmurfForm {...props} postSmurf={this.postSmurf} />}/>
-        <Route path="/smurfs/:id" render={props => <SingleSmurf {...props} /> }/>
+        <Route path="/smurfs/:id" render={props => <SingleSmurf {...props} setUpdateForm={this.setUpdateForm} /> }/>
+        <Route path="/update-smurf" render={props =>  <UpdateSmurfForm updateSmurf={this.updateSmurf} activeSmurf={this.state.activeSmurf} {...props} /> }/>
       </div>
     );
   }
