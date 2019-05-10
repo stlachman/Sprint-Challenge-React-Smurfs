@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
 const Tile = styled.div`
@@ -35,25 +34,15 @@ const Button = styled.button`
   }
 `;
 
-class Smurf extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      smurf: null
-    }
-  }
-
-  render() {
-    return (
-      <Tile>
-        <Title>{this.props.name}</Title>
-        <BoldText>{this.props.height} tall</BoldText>
-        <Text>{this.props.age} smurf years old</Text>
-        <Button onClick={() => this.props.deleteSmurf(this.props.id)}>Delete Smurf</Button>
-      </Tile>
-    )
-  }
+const Smurf = props => {
+  return (
+    <Tile>
+      <Title>{props.name}</Title>
+      <BoldText>{props.height} tall</BoldText>
+      <Text>{props.age} smurf years old</Text>
+      <Button onClick={() => props.deleteSmurf(props.id)}>Delete Smurf</Button>
+    </Tile>
+  )
 }
 
 Smurf.defaultProps = {

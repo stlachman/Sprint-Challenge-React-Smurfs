@@ -60,8 +60,13 @@ class SmurfForm extends Component {
     });
   }
 
-  handleInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleInputChange = event => {
+    event.persist();
+    let value = event.target.value;
+    if (event.target.value === "age") {
+      value = parseInt(value, 10);
+    }
+    this.setState({ [event.target.name]: value });
   };
 
   render() {
@@ -74,18 +79,21 @@ class SmurfForm extends Component {
             placeholder="name"
             value={this.state.name}
             name="name"
+            type="text"
           />
           <FormInput
             onChange={this.handleInputChange}
             placeholder="age"
             value={this.state.age}
             name="age"
+            type="number"
           />
           <FormInput
             onChange={this.handleInputChange}
             placeholder="height"
             value={this.state.height}
             name="height"
+            type="text"
           />
           <Button type="submit">Add to the village</Button>
         </Form>

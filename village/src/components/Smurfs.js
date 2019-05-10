@@ -20,7 +20,6 @@ const SmurfContainer = styled.ul`
 
 class Smurfs extends Component {
   render() {
-    // console.log(this.props);
     return (
       <Wrapper>
         <MainTitle>Smurf Village</MainTitle>
